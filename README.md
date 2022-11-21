@@ -1,8 +1,5 @@
 ## Simple authentication project with node js, express js, mongodb, ejs template engine.
 
-
-## HOW TO WORK ON API
-
 * Include Page:
     * Login Pag
     * Register page
