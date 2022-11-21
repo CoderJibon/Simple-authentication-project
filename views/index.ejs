@@ -1,0 +1,88 @@
+<div class="profile-body">
+  <div class="profile-wraper">
+    <div class="profile-info">
+      <div class="user info"><%- include('layouts/userInfo.ejs') %></div>
+      <hr />
+      <div class="user-menu">
+        <ul>
+          <li class="active">
+            <a href="/"><i class="fa fa-user-md"></i> Profile</a>
+          </li>
+          <li>
+            <a href="/profileEdit"><i class="fa fa-edit"></i> Edit</a>
+          </li>
+          <li>
+            <a href="/changePassword"
+              ><i class="fa fa-unlock-alt"></i> Change Password</a
+            >
+          </li>
+          <li>
+            <a href="/profilePhoto"
+              ><i class="fa fa-camera"></i> Profile Photo</a
+            >
+          </li>
+          <li>
+            <a href="/gallery"><i class="fa fa-picture-o"></i>Gallery</a>
+          </li>
+          <li>
+            <a href="/friends"><i class="fa fa-users"></i>Find Friends</a>
+          </li>
+          <li>
+            <a href="/logout"><i class="fa fa-sign-out"></i> Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="profile-box">
+      <div class="profile-details">
+        <div class="profile-photo">
+          <div>
+            <% if (user?.photo) { %>
+            <img src="/user/<%= user.photo %>" alt="" />
+            <% } else { %>
+            <img src="/images/avatar.png" alt="" />
+            <% } %>
+          </div>
+
+          <div class="profileUser">
+            <% if (user) { %>
+            <h2><%= user.name %></h2>
+            <h5><%= user.email %></h5>
+            <p>
+              <%= user.follower.length %> Follower | <%= user.following.length
+              %> Fowling
+            </p>
+            <% } %>
+          </div>
+        </div>
+
+        <br />
+        <hr />
+        <% if (user) { %>
+          <div class="tabbtn">
+            <ul>
+              <li><a class="activetab" href="/">Gallery</a></li>
+              <li><a href="/following/<%= user._id %>">following</a></li>
+              <li><a href="/follower/<%= user._id %>">follower</a></li>
+            </ul>
+          </div>
+        <% } %>
+        <hr />
+        <div id="galleryid">
+          <h2>Gallery</h2>
+          <hr />
+          <br />
+          <div class="gallery-photo galleryPhoto">
+            <% if (user) { %> <% user.gallery.forEach((item,index) => { %>
+            <label id="imgPop" class="xicons" for="">
+              <a target="_blank" href="/gallery/<%= item %>">
+                <img src="/gallery/<%= item %>" alt="" />
+              </a>
+            </label>
+            <% }) %> <% } %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

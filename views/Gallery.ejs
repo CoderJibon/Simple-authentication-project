@@ -1,0 +1,84 @@
+<div class="profile-body">
+  <div class="profile-wraper">
+    <div class="profile-info">
+      <div class="user info"><%- include('layouts/userInfo.ejs') %></div>
+      <hr />
+      <div class="user-menu">
+        <ul>
+          <li>
+            <a href="/"><i class="fa fa-user-md"></i> Profile</a>
+          </li>
+          <li>
+            <a href="/profileEdit"><i class="fa fa-edit"></i> Edit</a>
+          </li>
+          <li>
+            <a href="/changePassword"
+              ><i class="fa fa-unlock-alt"></i> Change Password</a
+            >
+          </li>
+          <li>
+            <a href="/profilePhoto"
+              ><i class="fa fa-camera"></i> Profile Photo</a
+            >
+          </li>
+          <li class="active">
+            <a href="/gallery"><i class="fa fa-picture-o"></i>Gallery</a>
+          </li>
+          <li>
+            <a href="/friends"><i class="fa fa-users"></i>Find Friends</a>
+          </li>
+          <li>
+            <a href="/logout"><i class="fa fa-sign-out"></i> Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="profile-box">
+      <div class="box-content">
+        <h2>Gallery</h2>
+        <hr />
+        <% if (message) { %>
+        <p style="color: green"><%= message %></p>
+        <% } %> <% if (err) { %>
+        <p style="color: red"><%= err %></p>
+        <% } %>
+        <hr />
+        <div class="form-wraper">
+          <form action="/gallery" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+              <label for="">Select Photos</label>
+              <div id="gallBox" class="gallery-photo"></div>
+
+              <label class="upload">
+                <i class="fa fa-photo uplaod"></i>
+                <input
+                  id="galleryPic"
+                  name="gallery"
+                  style="display: none"
+                  type="file"
+                  multiple
+                />
+              </label>
+            </div>
+            <div class="form-group">
+              <button type="submit">Update</button>
+            </div>
+          </form>
+          <br />
+          <hr />
+          <br />
+          <div class="gallery-photo">
+            <% if (user) { %> <% user.gallery.forEach((item,index) => { %>
+            <label class="xicons" for="">
+              <a href="/deleteGalleryImage/<%= item %>">
+                <i class="fa fa-times-circle" aria-hidden="true"></i>
+              </a>
+              <img src="/gallery/<%= item %>" alt="" />
+            </label>
+            <% }) %> <% } %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

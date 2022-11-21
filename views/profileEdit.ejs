@@ -1,0 +1,94 @@
+<div class="profile-body">
+
+    <div class="profile-wraper">
+        <div class="profile-info">
+            <div class="user info">
+                <%- include('layouts/userInfo.ejs')  %>
+            </div>
+            <hr>
+            <div class="user-menu">
+                <ul>
+                    <li >
+                      <a href="/"><i class="fa fa-user-md"></i> Profile</a>
+                    </li>
+                    <li class="active">
+                      <a  href="/profileEdit"><i class="fa fa-edit"></i> Edit</a>
+                    </li>
+                    <li>
+                      <a href="/changePassword"
+                        ><i class="fa fa-unlock-alt"></i> Change Password</a
+                      >
+                    </li>
+                    <li>
+                      <a href="/profilePhoto"><i class="fa fa-camera"></i> Profile Photo</a>
+                    </li>
+                    <li>
+                      <a href="/gallery"><i class="fa fa-picture-o"></i>Gallery</a>
+                    </li>
+                    <li>
+                      <a href="/friends"><i class="fa fa-users"></i>Find Friends</a>
+                    </li>
+                    <li>
+                      <a href="/logout"><i class="fa fa-sign-out"></i> Logout</a>
+                    </li>
+                  </ul>  
+            </div>
+        </div>
+        <div class="profile-box"> 
+            <div class="box-content">
+               <h2>Profile Edit</h2>
+                <hr>
+                <% if (message) { %>
+                    <p style="color:green;"><%= message %></p>
+                <% } %>
+                <% if (err) { %>
+                    <p style="color:red;"><%= err %></p>
+                <% } %>
+                <div class="form-wraper">
+                    <form action="/profileEdit" method="post">
+                        <div class="form-group">
+                            <label for="">Name</label>
+                            <input  <% if (user) { %> value="<%= user?.name %>" <% } %> name="name" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Email</label>
+                            <input disabled  <% if (user) { %> value="<%= user?.email %>" <% } %> name="email" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Phone</label>
+                            <input  <% if (user) { %> value="<%= user?.phone %>" <% } %>name="phone" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Skill</label>
+                            <select name="skill" id="">
+                                <option value="">--Select--</option>
+                                <option <% if (user?.skill == "mern") { %>selected<% } %> value="mern">MERN</option>
+                                <option <% if (user?.skill == "fullstack") { %>selected<% } %> value="fullstack">Full Stack Developer</option>
+                                <option <% if (user?.skill == "frontend") { %>selected<% } %> value="frontend">Front-end Developer</option>
+                                <option <% if (user?.skill == "backend") { %>selected<% } %> value="backend">Back-end Developer</option>
+                                <option <% if (user?.skill == "wordpress") { %>selected<% } %> value="wordpress">Wordpress Developer</option>
+                                <option <% if (user?.skill == "laravel") { %>selected<% } %> value="laravel">Laravel Developer</option>
+                                <option <% if (user?.skill == "blockchine") { %>selected<% } %> value="blockchine">BlockChine Developer</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Gender</label>
+                            <select name="gender" id="">
+                                <option value="">--Select--</option>
+                                <option <% if (user?.gender == "male") { %>selected<% } %> value="male">Male</option>
+                                <option <% if (user?.gender == "female") { %>selected<% } %> value="female">Female</option>
+                            </select>
+                        </div> 
+                        <div class="form-group">
+                            <label for="">Profile Short Description</label>
+                            <textarea name="desc" id="" cols="5" rows="5"><% if (user) { %><%= user?.desc %><% } %></textarea>
+                        </div>                                       
+                        <div class="form-group">
+                            <button type="submit">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

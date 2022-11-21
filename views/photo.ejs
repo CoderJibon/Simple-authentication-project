@@ -1,0 +1,82 @@
+<div class="profile-body">
+  <div class="profile-wraper">
+    <div class="profile-info">
+      <div class="user info"><%- include('layouts/userInfo.ejs') %></div>
+      <hr />
+      <div class="user-menu">
+        <ul>
+          <li>
+            <a href="/"><i class="fa fa-user-md"></i> Profile</a>
+          </li>
+          <li>
+            <a href="/profileEdit"><i class="fa fa-edit"></i> Edit</a>
+          </li>
+          <li>
+            <a href="/changePassword"
+              ><i class="fa fa-unlock-alt"></i> Change Password</a
+            >
+          </li>
+          <li class="active">
+            <a href="/profilePhoto"
+              ><i class="fa fa-camera"></i> Profile Photo</a
+            >
+          </li>
+          <li>
+            <a href="/gallery"><i class="fa fa-picture-o"></i>Gallery</a>
+          </li>
+          <li>
+            <a href="/friends"><i class="fa fa-users"></i>Find Friends</a>
+          </li>
+          <li>
+            <a href="/logout"><i class="fa fa-sign-out"></i> Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="profile-box">
+      <div class="box-content">
+        <h2>Change Photo</h2>
+        <hr />
+        <% if (message) { %>
+        <p style="color: green"><%= message %></p>
+        <% } %> <% if (err) { %>
+        <p style="color: red"><%= err %></p>
+        <% } %>
+        <div class="form-wraper">
+          <form
+            action="/profilePhoto"
+            method="post"
+            enctype="multipart/form-data"
+          >
+            <div class="form-group">
+              <label for="">Select a Photo</label>
+              <div class="profile-photo">
+                <% if (user?.photo) { %>
+                <img
+                  id="profilePicDisplay"
+                  src="/user/<%= user.photo %>"
+                  alt=""
+                />
+                <% } else { %>
+                <img id="profilePicDisplay" src="./images/avatar.png" alt="" />
+                <% } %>
+              </div>
+              <label class="upload">
+                <i class="fa fa-photo uplaod"></i>
+                <input
+                  id="profilePic"
+                  name="photo"
+                  style="display: none"
+                  type="file"
+                />
+              </label>
+            </div>
+            <div class="form-group">
+              <button type="submit">Change</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

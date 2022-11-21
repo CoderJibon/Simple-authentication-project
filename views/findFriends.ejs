@@ -1,0 +1,91 @@
+<div class="profile-body">
+  <div class="profile-wraper">
+    <div class="profile-info">
+      <div class="user info"><%- include('layouts/userInfo.ejs') %></div>
+      <hr />
+      <div class="user-menu">
+        <ul>
+          <li>
+            <a href="/"><i class="fa fa-user-md"></i> Profile</a>
+          </li>
+          <li>
+            <a href="/profileEdit"><i class="fa fa-edit"></i> Edit</a>
+          </li>
+          <li>
+            <a href="/changePassword"
+              ><i class="fa fa-unlock-alt"></i> Change Password</a
+            >
+          </li>
+          <li>
+            <a href="/profilePhoto"
+              ><i class="fa fa-camera"></i> Profile Photo</a
+            >
+          </li>
+          <li>
+            <a href="/gallery"><i class="fa fa-picture-o"></i>Gallery</a>
+          </li>
+          <li class="active">
+            <a href="/friends"><i class="fa fa-users"></i>Find Friends</a>
+          </li>
+          <li>
+            <a href="/logout"><i class="fa fa-sign-out"></i> Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div id="frindpage" class="profile-box">
+      <h1>Find Friends</h1>
+      <hr />
+      <br />
+      <form id="seractBar" action="/friends" method="post">
+        <input name="search" type="search" />
+        <button type="submit">Search</button>
+      </form>
+      <br />
+      <hr />
+      <br />
+      <ul class="friens">
+        <% if (getAll) { %> <% getAll.forEach(userData => { %>
+        <li>
+          <div class="friendsList">
+            <div>
+              <div>
+                <% if (userData?.photo) { %>
+                <a href="/friendProfile/<%= userData._id %>">
+                  <img src="/user/<%= userData.photo %>" alt="" />
+                </a>
+                <% } else { %>
+                <a href="/friendProfile/<%= userData._id %>">
+                  <img src="/images/avatar.png" alt="" />
+                </a>
+                <% } %>
+              </div>
+            </div>
+            <div>
+              <div>
+                <h4><%= userData.name %></h4>
+                <p><%= userData.email %></p>
+              </div>
+            </div>
+            <div>
+              <div class="bbbb">
+                <% const follow = user.following.some(data => data ==
+                userData._id) %><% if (follow) { %>
+                <a
+                  class="unfollow"
+                  id="addBtn"
+                  href="/unfriends/<%= userData._id %>"
+                  >UnFollow</a
+                >
+                <% } else { %>
+                <a id="addBtn" href="/friends/<%= userData._id %>">Follow</a>
+                <% } %>
+              </div>
+            </div>
+          </div>
+        </li>
+        <% }) %> <% } %>
+      </ul>
+    </div>
+  </div>
+</div>
